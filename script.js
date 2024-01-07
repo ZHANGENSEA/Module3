@@ -1,38 +1,44 @@
-const gamesList = [
+const fruitList = [
 	{
-		title: "Minecraft",
-		year: 2009,
-		imageUrl: "https://pbs.twimg.com/media/FTsV3NLWQAEFfXJ.jpg:large",
+		title: "Strawberry",
+		quantity: 500,
+		price: 12.9,
+		imageUrl: "https://images.pexels.com/photos/1435301/pexels-photo-1435301.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 	},
 	{
-		title: "Fortnite",
-		year: 2017,
+		title: "Apple",
+		quantity: 2000,
+		price: 3.9,
 		imageUrl:
-			"https://www.creocommunity.de/wp-content/uploads/2021/12/Fortnite_blog_season-5_BR05_Social_-Launch_Hero-Line-Up-1920x1080-2117b3d382b87887271a17a78122b7316ff0c1c0.jpg",
+			"https://images.pexels.com/photos/2949140/pexels-photo-2949140.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 	},
 	{
-		title: "Baldur's Gate 3",
-		year: 2023,
+		title: "Peach",
+		quantity: 1000,
+		price: 4.7,
 		imageUrl:
-			"https://static.fnac-static.com/multimedia/Images/FD/Comete/166361/CCP_IMG_1200x800/2208556.jpg",
+			"https://images.pexels.com/photos/7129144/pexels-photo-7129144.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 	},
 	{
-		title: "FC24",
-		year: 2023,
+		title: "Orange",
+		quantity: 1500,
+		price: 4.1,
 		imageUrl:
-			"https://media.wired.com/photos/6516df152a96d14834d98190/master/pass/EA-FC-Is-Just-FIFA-Culture.jpg",
+			"https://images.pexels.com/photos/691166/pexels-photo-691166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 	},
 	{
-		title: "Half life 2",
-		year: 2004,
+		title: "Grape",
+		quantity: 800,
+		price: 9.9,
 		imageUrl:
-			"https://gaming-cdn.com/images/products/2284/orig/half-life-2-pc-mac-game-steam-cover.jpg?v=1650555068",
+			"https://images.pexels.com/photos/708777/pexels-photo-708777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 	},
 	{
-		title: "Pokemon 3D",
-		year: 2016,
+		title: "Cherry",
+		quantity: 400,
+		price: 25.9,
 		imageUrl:
-			"https://c4.iggcdn.com/indiegogo-media-prod-cld/image/upload/c_fill,w_695,g_auto,q_auto,dpr_2.6,f_auto,h_460/b8nqzuddauabjnwo4qjn",
+			"https://images.pexels.com/photos/371043/pexels-photo-371043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
 	},
 ]
 
@@ -43,31 +49,39 @@ const modalFooter = document.querySelector(".modal-footer")
 
 const cardShow = () => {
 	// bucle pour afficher les games
-	gamesList.forEach((game) => {
+	fruitList.forEach((game) => {
 		gameContainer.innerHTML += `
         <article class="col">
            <div class="card shadow-sm">
               <img src="${game.imageUrl}" class="card-img-top" alt="...">
                <div class="card-body">
                    <h5 class="card-title">${game.title}</h5>
-                   <p class="card-text">Year: ${game.year}</p>
+                   <p class="card-text">Available quantity : ${game.quantity}</p>
                    <div class="btn-group">
                         <button
                             type="button"
-                            class="view btn btn-sm btn-outline-dark"
+                            class="btn btn-sm btn-outline-dark detail"
                             data-bs-toggle="modal"
-				            data-bs-target="#modalGame"
+				            data-bs-target="#modalBS"
                         >
-                            View
+                            Detail
                         </button>
                         <button
                             type="button"
                             class="btn btn-sm btn-outline-dark edit"
                             data-bs-toggle="modal"
-				            data-bs-target="#modalGame"
+				            data-bs-target="#modalBS"
                         >
                             Edit
                         </button>
+						<button
+							type="button"
+							class="btn btn-sm btn-outline-dark order"
+							data-bs-toggle="modal"
+							data-bs-target="#modalBS"
+						>
+							Order
+						</button>
                     </div>
                </div>
            </div>
@@ -78,17 +92,20 @@ const cardShow = () => {
 
 cardShow()
 
-// ratraper le button "views"
-const viewBtnArray = document.querySelectorAll(".view")
+// ratraper le button "details"
+const detailBtnArray = document.querySelectorAll(".detail")
 
 // ratraper le button "edit"
 const editBtnArray = document.querySelectorAll(".edit")
 
-viewBtnArray.forEach((btn, index) => {
+// ratraper le button "order"
+const orderBtnArray = document.querySelectorAll(".order")
+
+detailBtnArray.forEach((btn, index) => {
 	btn.addEventListener("click", () => {
-		modalTitle.textContent = gamesList[index].title
-		modalBody.innerHTML = `<img class="img-fluid" src="${gamesList[index].imageUrl}" >`
-		modalBody.innerHTML += `<p>Year: ${gamesList[index].year}</p>`
+		modalTitle.textContent = fruitList[index].title
+		modalBody.innerHTML = `<img class="img-fluid" src="${fruitList[index].imageUrl}" >`
+		modalBody.innerHTML += `<p>Available quantity : ${fruitList[index].quantity} <br>Price : ${fruitList[index].price}€</p>`
 		modalFooter.innerHTML = `
             <button
                 type="button"
@@ -104,27 +121,23 @@ viewBtnArray.forEach((btn, index) => {
 const addEditClick = () => {
 	editBtnArray.forEach((btn, indx) => {
 		btn.addEventListener("click", () => {
-			console.log(indx)
-			modalTitle.textContent = "Edit mode !"
+			modalTitle.textContent = "Edit page"
 			modalBody.innerHTML = `
             <form>
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" aria-describedby="title"  value="${gamesList[indx].title}">
-                    <div class="d-none form-text">We'll never share your email with anyone else.</div>
+                    <input type="text" class="form-control" id="title" aria-describedby="title"  value="${fruitList[indx].title}">
                 </div>        
                 
                  <div class="mb-3">
-                    <label for="year" class="form-label">Year</label>
-                    <input type="number" class="form-control" id="year" aria-describedby="year"  value="${gamesList[indx].year}">
-                    <div class="d-none form-text">We'll never share your email with anyone else.</div>
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="number" class="form-control" id="quantity" aria-describedby="quantity"  value="${fruitList[indx].quantity}">
                 </div>     
 
                 <div class="mb-3">
                     <label for="image" class="form-label">Image URL</label>
-                    <input type="text" class="form-control" id="image" aria-describedby="image"  value="${gamesList[indx].imageUrl}">
-                    <div class="d-none form-text">We'll never share your email with anyone else.</div>
-                    <img class="img-thumbnail w-50 mt-2" src="${gamesList[indx].imageUrl}" >
+                    <input type="text" class="form-control" id="image" aria-describedby="image"  value="${fruitList[indx].imageUrl}">
+                    <img class="img-thumbnail w-50 mt-2" src="${fruitList[indx].imageUrl}" >
                 </div>     
         `
 			modalFooter.innerHTML = `
@@ -133,48 +146,49 @@ const addEditClick = () => {
             >
                 Close
             </button>
-            <button type="submit" class="btn btn-primary" id="sub-btn" data-bs-dismiss="modal">
+            <button type="submit" class="btn btn-primary" id="save-sub-btn" data-bs-dismiss="modal">
                 Save changes
             </button>
             </form>
         `
 
 			/*  form handling   */
-			const submitBtn = document.querySelector("#sub-btn")
+			const submitBtn = document.querySelector("#save-sub-btn")
 
 			submitBtn.addEventListener("click", () => {
 				const formulaire = document.querySelector("form")
 				let newTitle = formulaire["title"].value
-				let newYear = formulaire["year"].value
+				let newquantity = formulaire["quantity"].value
 				var newImage = formulaire["image"].value
 
 				/*  form validation  */
 				/*  empty fields  */
-				if (newTitle === "" || newYear === "" || newImage === "") {
-					alert("Certaines parties de votre formulaire sont vides")
+				if (newTitle === "" || newquantity === "" || newImage === "") {
+					alert("Some empty inputs, please check")
 					return
 				}
 				/*  odd characters  */
-				const alphanumericRegex = /^[a-zA-Z0-9/.:-_ 'éùçà()]+$/
+				const alphanumericRegex = /^[a-zA-Z0-9\/.:-_ 'éùçà(),-=?&]+$/
+				const NumericRegex = /^[0-9]+$/
 				if (
 					!alphanumericRegex.test(newTitle) ||
-					!alphanumericRegex.test(newYear)
+					!NumericRegex.test(newquantity) ||
+					!alphanumericRegex.test(newImage)
 				) {
-					alert("Certaines characters sont pas vailde")
+					alert("Some invalid inputs")
 					return
 				}
 				/*  tout ok, on enregistre  */
 
-				// console.log(newTitle, newImage, newYear, indx)
-				gamesList[indx].title = newTitle
-				gamesList[indx].year = newYear
-				gamesList[indx].imageUrl = newImage
+				fruitList[indx].title = newTitle
+				fruitList[indx].quantity = newquantity
+				fruitList[indx].imageUrl = newImage
 
 				const cardList = document.querySelectorAll(".card")
 				document.querySelectorAll(".card-title")[indx].innerHTML = newTitle
 				document.querySelectorAll(".card-text")[
 					indx
-				].innerHTML = `Year: ${newYear} `
+				].innerHTML = `Available quantity : ${newquantity} `
 				document.querySelectorAll(".card-img-top")[indx].src = newImage
 			})
 		})
@@ -182,3 +196,64 @@ const addEditClick = () => {
 }
 
 addEditClick()
+
+
+const addOrderClick = () => {
+	orderBtnArray.forEach((btn, indx) => {
+		btn.addEventListener("click", () => {
+			modalTitle.textContent = "Order page"
+			modalBody.innerHTML = `
+            <form>
+                 <div class="mb-3">
+                    <label for="orderQuantity" class="form-label">Order quantity</label>
+                    <input type="number" class="form-control" id="orderQuantity" aria-describedby="orderQuantity"  value=0>
+                </div>       
+        `
+			modalFooter.innerHTML = `
+            <button
+                type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+            >
+                Close
+            </button>
+            <button type="submit" class="btn btn-primary" id="order-sub-btn" data-bs-dismiss="modal">
+                Order
+            </button>
+            </form>
+        `
+
+			/*  form handling   */
+			const submitBtn = document.querySelector("#order-sub-btn")
+
+			submitBtn.addEventListener("click", () => {
+				const formulaire = document.querySelector("form")
+				let orderquantity = formulaire["orderQuantity"].value
+
+				/*  form validation  */
+				/*  empty fields  */
+				if (orderquantity === "") {
+					alert("The order quantity is empty, please check")
+					return
+				}
+				/*  odd characters  */
+				const NumericRegex = /^[0-9]+$/
+				if (!NumericRegex.test(orderquantity)) {
+					alert("The order quantity is not a number")
+					return
+				}
+				if (fruitList[indx].quantity-orderquantity<0) {
+					alert("Really sorry, we don't have enough")
+					return
+				}
+				/*  tout ok, on enregistre  */
+				fruitList[indx].quantity -= orderquantity
+				const cardList = document.querySelectorAll(".card")
+				document.querySelectorAll(".card-text")[
+					indx
+				].innerHTML = `Available quantity : ${fruitList[indx].quantity} `
+				alert("You ordered "+(fruitList[indx].price*orderquantity)+"€ of "+fruitList[indx].title+", thank you!")
+			})
+		})
+	})
+}
+
+addOrderClick()
