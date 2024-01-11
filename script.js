@@ -48,7 +48,7 @@ const modalBody = document.querySelector(".modal-body")
 const modalFooter = document.querySelector(".modal-footer")
 
 const cardShow = () => {
-	// bucle pour afficher les games
+	// boucle pour afficher les best sellers
 	fruitList.forEach((game) => {
 		gameContainer.innerHTML += `
         <article class="col">
